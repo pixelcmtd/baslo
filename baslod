@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -uxe
+
+while true ; do
+        sleep 5
+        ifconfig en0 | grep -E '172.[0-9]+.[0-9]+.[0-9]+' || continue
+        ping -c 1 1.1.1.1 || ./login "$1" "$2"
+        sleep 20
+done
