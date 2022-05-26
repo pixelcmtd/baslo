@@ -1,0 +1,10 @@
+#!/bin/sh
+
+for b in `seq 255` ; do
+        for a in `seq 255` ; do
+                fping 172.19.$b.$a -c 1 -t 100 2>&1 >/dev/null && echo 172.19.$b.$a &
+                while [ `jobs | wc -l` -gt 10 ] ; do
+                        sleep 1
+                done
+        done
+done
